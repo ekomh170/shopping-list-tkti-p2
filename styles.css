@@ -1,0 +1,50 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: radial-gradient(rgba(47, 93, 80, 0.08) 0.7px, transparent 0.7px);
+  background-size: 18px 18px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.item-row {
+  animation: slide-in 240ms ease-out both;
+}
+
+.item-row.is-completed .item-name {
+  color: rgba(23, 34, 29, 0.36);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+}
+
+.check-button {
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.check-button:hover {
+  transform: scale(1.06);
+}
+
+.check-button.is-checked {
+  background: #2f5d50;
+  border-color: #2f5d50;
+  color: white;
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
