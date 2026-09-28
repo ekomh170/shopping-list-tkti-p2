@@ -1,121 +1,361 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f7f7f2">
-  <meta name="description" content="Daftar belanja sederhana untuk mengatur kebutuhan rumah dengan mudah.">
-  <title>BelanjaKita | Shopping List</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui', 'sans-serif']
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f7f2" />
+    <meta
+      name="description"
+      content="Daftar belanja sederhana untuk mengatur kebutuhan rumah dengan mudah."
+    />
+    <title>BelanjaKita | Shopping List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+              display: [
+                "Plus Jakarta Sans",
+                "ui-sans-serif",
+                "system-ui",
+                "sans-serif",
+              ],
+            },
+            colors: {
+              ink: "#17221d",
+              moss: "#2f5d50",
+              mint: "#dceee2",
+              butter: "#f4d35e",
+              paper: "#f7f7f2",
+            },
+            boxShadow: {
+              soft: "0 20px 60px rgba(38, 63, 51, 0.10)",
+              line: "0 1px 0 rgba(23, 34, 29, 0.08)",
+            },
           },
-          colors: {
-            ink: '#17221d',
-            moss: '#2f5d50',
-            mint: '#dceee2',
-            butter: '#f4d35e',
-            paper: '#f7f7f2'
-          },
-          boxShadow: {
-            soft: '0 20px 60px rgba(38, 63, 51, 0.10)',
-            line: '0 1px 0 rgba(23, 34, 29, 0.08)'
-          }
-        }
-      }
-    }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body class="min-h-screen bg-paper text-ink antialiased">
-  <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
-    <div class="absolute -right-32 -top-40 h-96 w-96 rounded-full bg-mint/70 blur-3xl"></div>
-    <div class="absolute -bottom-48 -left-32 h-96 w-96 rounded-full bg-butter/20 blur-3xl"></div>
-  </div>
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="min-h-screen bg-paper text-ink antialiased">
+    <div
+      class="pointer-events-none fixed inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <div
+        class="absolute -right-32 -top-40 h-96 w-96 rounded-full bg-mint/70 blur-3xl"
+      ></div>
+      <div
+        class="absolute -bottom-48 -left-32 h-96 w-96 rounded-full bg-butter/20 blur-3xl"
+      ></div>
+    </div>
 
-  <main class="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-5 py-6 sm:px-8 lg:px-12 lg:py-10">
-    <header class="flex items-center justify-between gap-4">
-      <a href="./" class="flex items-center gap-3" aria-label="BelanjaKita beranda">
-        <span class="grid h-10 w-10 place-items-center rounded-2xl bg-moss text-white shadow-lg shadow-moss/20">
-          <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
-        </span>
-        <span class="font-display text-lg font-extrabold tracking-tight">BelanjaKita</span>
-      </a>
-      <span class="hidden rounded-full border border-ink/10 bg-white/60 px-4 py-2 text-xs font-semibold text-ink/60 sm:inline-flex">Daftar belanja yang lebih ringan</span>
-    </header>
+    <main
+      class="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-5 py-6 sm:px-8 lg:px-12 lg:py-10"
+    >
+      <header class="flex items-center justify-between gap-4">
+        <a
+          href="./"
+          class="flex items-center gap-3"
+          aria-label="BelanjaKita beranda"
+        >
+          <span
+            class="grid h-10 w-10 place-items-center rounded-2xl bg-moss text-white shadow-lg shadow-moss/20"
+          >
+            <svg
+              aria-hidden="true"
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"
+              />
+              <circle cx="10" cy="20" r="1" />
+              <circle cx="18" cy="20" r="1" />
+            </svg>
+          </span>
+          <span class="font-display text-lg font-extrabold tracking-tight"
+            >BelanjaKita</span
+          >
+        </a>
+        <span
+          class="hidden rounded-full border border-ink/10 bg-white/60 px-4 py-2 text-xs font-semibold text-ink/60 sm:inline-flex"
+          >Daftar belanja yang lebih ringan</span
+        >
+      </header>
 
-    <section class="grid flex-1 items-center gap-10 py-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20 lg:py-16">
-      <div class="max-w-lg">
-        <div class="mb-5 inline-flex items-center gap-2 rounded-full bg-butter/35 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-ink/70">
-          <span class="h-1.5 w-1.5 rounded-full bg-moss"></span>
-          Rapi, cepat, siap belanja
-        </div>
-        <h1 class="font-display text-4xl font-extrabold leading-[1.06] tracking-[-0.04em] sm:text-5xl lg:text-[4.25rem]">Belanja tanpa ada yang <span class="text-moss">tertinggal.</span></h1>
-        <p class="mt-6 max-w-md text-base leading-7 text-ink/60 sm:text-lg">Catat kebutuhanmu, tandai yang sudah masuk keranjang, dan nikmati daftar yang selalu tersimpan.</p>
-        <div class="mt-8 flex items-center gap-5 text-sm font-semibold text-ink/60">
-          <div class="flex -space-x-2" aria-hidden="true"><span class="grid h-8 w-8 place-items-center rounded-full border-2 border-paper bg-[#f2b5a7] text-xs">A</span><span class="grid h-8 w-8 place-items-center rounded-full border-2 border-paper bg-[#b5d7c1] text-xs">S</span><span class="grid h-8 w-8 place-items-center rounded-full border-2 border-paper bg-[#f4d35e] text-xs">R</span></div>
-          <span>Untuk rencana kecil setiap hari</span>
-        </div>
-      </div>
-
-      <section class="overflow-hidden rounded-[2rem] border border-white/80 bg-white/85 shadow-soft backdrop-blur-xl" aria-labelledby="list-heading">
-        <div class="border-b border-ink/10 px-5 pb-5 pt-6 sm:px-7 sm:pt-7">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <p class="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-moss">Daftar minggu ini</p>
-              <h2 id="list-heading" class="font-display text-2xl font-extrabold tracking-tight">Belanja dapur</h2>
+      <section
+        class="grid flex-1 items-center gap-10 py-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20 lg:py-16"
+      >
+        <div class="max-w-lg">
+          <div
+            class="mb-5 inline-flex items-center gap-2 rounded-full bg-butter/35 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-ink/70"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-moss"></span>
+            Rapi, cepat, siap belanja
+          </div>
+          <h1
+            class="font-display text-4xl font-extrabold leading-[1.06] tracking-[-0.04em] sm:text-5xl lg:text-[4.25rem]"
+          >
+            Belanja tanpa ada yang <span class="text-moss">tertinggal.</span>
+          </h1>
+          <p class="mt-6 max-w-md text-base leading-7 text-ink/60 sm:text-lg">
+            Catat kebutuhanmu, tandai yang sudah masuk keranjang, dan nikmati
+            daftar yang selalu tersimpan.
+          </p>
+          <div
+            class="mt-8 flex items-center gap-5 text-sm font-semibold text-ink/60"
+          >
+            <div class="flex -space-x-2" aria-hidden="true">
+              <span
+                class="grid h-8 w-8 place-items-center rounded-full border-2 border-paper bg-[#f2b5a7] text-xs"
+                >A</span
+              ><span
+                class="grid h-8 w-8 place-items-center rounded-full border-2 border-paper bg-[#b5d7c1] text-xs"
+                >S</span
+              ><span
+                class="grid h-8 w-8 place-items-center rounded-full border-2 border-paper bg-[#f4d35e] text-xs"
+                >R</span
+              >
             </div>
-            <div class="rounded-2xl bg-mint px-3 py-2 text-right">
-              <p id="progress-count" class="font-display text-xl font-extrabold text-moss">0/0</p>
-              <p class="text-[10px] font-bold uppercase tracking-wider text-moss/70">selesai</p>
+            <span>Untuk rencana kecil setiap hari</span>
+          </div>
+        </div>
+
+        <section
+          class="overflow-hidden rounded-[2rem] border border-white/80 bg-white/85 shadow-soft backdrop-blur-xl"
+          aria-labelledby="list-heading"
+        >
+          <div class="border-b border-ink/10 px-5 pb-5 pt-6 sm:px-7 sm:pt-7">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p
+                  class="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-moss"
+                >
+                  Daftar minggu ini
+                </p>
+                <h2
+                  id="list-heading"
+                  class="font-display text-2xl font-extrabold tracking-tight"
+                >
+                  Belanja dapur
+                </h2>
+              </div>
+              <div class="rounded-2xl bg-mint px-3 py-2 text-right">
+                <p
+                  id="progress-count"
+                  class="font-display text-xl font-extrabold text-moss"
+                >
+                  0/0
+                </p>
+                <p
+                  class="text-[10px] font-bold uppercase tracking-wider text-moss/70"
+                >
+                  selesai
+                </p>
+              </div>
+            </div>
+            <form id="item-form" class="mt-6 flex gap-2" autocomplete="off">
+              <label class="sr-only" for="item-input">Nama barang</label>
+              <input
+                id="item-input"
+                name="item"
+                type="text"
+                maxlength="80"
+                placeholder="Tambahkan barang..."
+                class="min-w-0 flex-1 rounded-xl border border-ink/10 bg-paper/70 px-4 py-3 text-sm outline-none transition placeholder:text-ink/35 focus:border-moss focus:ring-4 focus:ring-moss/10"
+              />
+              <button
+                type="submit"
+                class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-moss text-white transition hover:-translate-y-0.5 hover:bg-[#244a3f] focus:outline-none focus:ring-4 focus:ring-moss/20"
+                aria-label="Tambah barang"
+                title="Tambah barang"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </button>
+            </form>
+            <form id="ai-form" class="mt-2 flex gap-2" autocomplete="off">
+              <label class="sr-only" for="ai-input"
+                >Minta saran belanja dari AI</label
+              >
+              <input
+                id="ai-input"
+                name="prompt"
+                type="text"
+                maxlength="200"
+                placeholder="Mau masak apa? mis. soto ayam untuk 4 orang"
+                class="min-w-0 flex-1 rounded-xl border border-butter/60 bg-butter/10 px-4 py-3 text-sm outline-none transition placeholder:text-ink/35 focus:border-butter focus:ring-4 focus:ring-butter/25"
+              />
+              <button
+                id="ai-button"
+                type="submit"
+                class="h-12 shrink-0 rounded-xl bg-butter px-4 text-xs font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#ecc53f] focus:outline-none focus:ring-4 focus:ring-butter/30 disabled:cursor-wait disabled:opacity-60 disabled:hover:translate-y-0"
+              >
+                ✦ Saran AI
+              </button>
+            </form>
+            <div
+              id="ai-panel"
+              class="mt-4 hidden rounded-2xl border border-butter/60 bg-butter/10 p-4"
+              aria-live="polite"
+            >
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <p
+                    class="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/50"
+                  >
+                    ✦ Jawaban AI
+                  </p>
+                  <h3
+                    id="ai-question"
+                    class="mt-0.5 truncate font-display text-base font-bold"
+                  ></h3>
+                </div>
+                <button
+                  id="ai-close"
+                  type="button"
+                  class="-m-1 shrink-0 rounded-lg p-1.5 text-ink/40 transition hover:bg-butter/30 hover:text-ink"
+                  aria-label="Tutup jawaban AI"
+                  title="Tutup"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                  >
+                    <path d="M6 6l12 12M18 6 6 18" />
+                  </svg>
+                </button>
+              </div>
+              <p
+                id="ai-explanation"
+                class="mt-2 whitespace-pre-line text-sm leading-6 text-ink/70"
+              ></p>
+              <ul
+                id="ai-suggestions"
+                class="mt-3 max-h-80 divide-y divide-ink/10 overflow-y-auto"
+              ></ul>
+              <button
+                id="ai-add-all"
+                type="button"
+                class="mt-3 w-full rounded-xl bg-moss px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#244a3f] disabled:cursor-not-allowed disabled:opacity-40"
+              ></button>
             </div>
           </div>
-          <form id="item-form" class="mt-6 flex gap-2" autocomplete="off">
-            <label class="sr-only" for="item-input">Nama barang</label>
-            <input id="item-input" name="item" type="text" maxlength="80" placeholder="Tambahkan barang..." class="min-w-0 flex-1 rounded-xl border border-ink/10 bg-paper/70 px-4 py-3 text-sm outline-none transition placeholder:text-ink/35 focus:border-moss focus:ring-4 focus:ring-moss/10">
-            <button type="submit" class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-moss text-white transition hover:-translate-y-0.5 hover:bg-[#244a3f] focus:outline-none focus:ring-4 focus:ring-moss/20" aria-label="Tambah barang" title="Tambah barang">
-              <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+
+          <div
+            class="flex items-center justify-between gap-3 border-b border-ink/10 px-5 py-3 sm:px-7"
+          >
+            <div
+              class="flex gap-1 rounded-lg bg-paper p-1"
+              role="tablist"
+              aria-label="Filter daftar"
+            >
+              <button
+                class="filter-btn active rounded-md px-3 py-1.5 text-xs font-bold transition"
+                data-filter="all"
+                role="tab"
+                aria-selected="true"
+              >
+                Semua
+              </button>
+              <button
+                class="filter-btn rounded-md px-3 py-1.5 text-xs font-bold text-ink/45 transition"
+                data-filter="active"
+                role="tab"
+                aria-selected="false"
+              >
+                Belum
+              </button>
+              <button
+                class="filter-btn rounded-md px-3 py-1.5 text-xs font-bold text-ink/45 transition"
+                data-filter="completed"
+                role="tab"
+                aria-selected="false"
+              >
+                Selesai
+              </button>
+            </div>
+            <button
+              id="clear-completed"
+              class="text-xs font-bold text-ink/40 transition hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-30"
+              type="button"
+            >
+              Hapus yang selesai
             </button>
-          </form>
-        </div>
-
-        <div class="flex items-center justify-between gap-3 border-b border-ink/10 px-5 py-3 sm:px-7">
-          <div class="flex gap-1 rounded-lg bg-paper p-1" role="tablist" aria-label="Filter daftar">
-            <button class="filter-btn active rounded-md px-3 py-1.5 text-xs font-bold transition" data-filter="all" role="tab" aria-selected="true">Semua</button>
-            <button class="filter-btn rounded-md px-3 py-1.5 text-xs font-bold text-ink/45 transition" data-filter="active" role="tab" aria-selected="false">Belum</button>
-            <button class="filter-btn rounded-md px-3 py-1.5 text-xs font-bold text-ink/45 transition" data-filter="completed" role="tab" aria-selected="false">Selesai</button>
           </div>
-          <button id="clear-completed" class="text-xs font-bold text-ink/40 transition hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-30" type="button">Hapus yang selesai</button>
-        </div>
 
-        <div id="list-container" class="min-h-[270px] px-5 py-3 sm:px-7" aria-live="polite"></div>
-        <div id="empty-state" class="hidden px-6 pb-8 pt-10 text-center">
-          <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-butter/30 text-2xl">✦</div>
-          <h3 class="mt-4 font-display text-base font-bold">Daftarmu masih kosong</h3>
-          <p class="mt-1 text-sm text-ink/50">Tambahkan barang pertama untuk memulai.</p>
-        </div>
-        <div class="flex items-center justify-between border-t border-ink/10 px-5 py-4 text-xs text-ink/45 sm:px-7">
-          <span id="items-left">0 barang tersisa</span>
-          <span class="inline-flex items-center gap-1.5"><span class="h-1.5 w-1.5 rounded-full bg-moss"></span> tersimpan otomatis</span>
-        </div>
+          <div
+            id="list-container"
+            class="min-h-[270px] px-5 py-3 sm:px-7"
+            aria-live="polite"
+          ></div>
+          <div id="empty-state" class="hidden px-6 pb-8 pt-10 text-center">
+            <div
+              class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-butter/30 text-2xl"
+            >
+              ✦
+            </div>
+            <h3 class="mt-4 font-display text-base font-bold">
+              Daftarmu masih kosong
+            </h3>
+            <p class="mt-1 text-sm text-ink/50">
+              Tambahkan barang pertama untuk memulai.
+            </p>
+          </div>
+          <div
+            class="flex items-center justify-between border-t border-ink/10 px-5 py-4 text-xs text-ink/45 sm:px-7"
+          >
+            <span id="items-left">0 barang tersisa</span>
+            <span class="inline-flex items-center gap-1.5"
+              ><span class="h-1.5 w-1.5 rounded-full bg-moss"></span> tersimpan
+              otomatis</span
+            >
+          </div>
+        </section>
       </section>
-    </section>
 
-    <footer class="flex flex-col gap-2 border-t border-ink/10 pt-5 text-xs text-ink/40 sm:flex-row sm:items-center sm:justify-between">
-      <span>BelanjaKita © 2026</span>
-      <span>Dibuat untuk hari yang lebih teratur.</span>
-    </footer>
-  </main>
+      <footer
+        class="flex flex-col gap-2 border-t border-ink/10 pt-5 text-xs text-ink/40 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <span>BelanjaKita © 2026</span>
+        <span>Dibuat untuk hari yang lebih teratur.</span>
+      </footer>
+    </main>
 
-  <div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-10 -translate-x-1/2 translate-y-3 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-white opacity-0 shadow-xl transition-all" role="status"></div>
-  <script src="app.js"></script>
-</body>
+    <div
+      id="toast"
+      class="pointer-events-none fixed bottom-6 left-1/2 z-10 -translate-x-1/2 translate-y-3 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-white opacity-0 shadow-xl transition-all"
+      role="status"
+    ></div>
+    <script src="app.js"></script>
+  </body>
 </html>

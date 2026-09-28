@@ -13,6 +13,7 @@ BelanjaKita adalah aplikasi web _shopping list_ sederhana untuk mencatat kebutuh
 ## Fitur
 
 - **Tambah barang**: ketik nama barang lalu tekan Enter atau tombol `+`.
+- **Saran AI (Gemini)**: tanyakan makanan, kegiatan, atau benda apa pun, misalnya _"soto ayam untuk 4 orang"_ atau _"mau camping 2 hari"_. AI memberi penjelasan singkat dan daftar barang beserta kegunaannya, lalu kamu pilih mana yang ingin ditambahkan (satu per satu atau sekaligus).
 - **Edit barang**: ubah nama barang langsung di daftar.
 - **Tandai sudah dibeli**: centang barang yang sudah masuk keranjang.
 - **Hapus barang**: hapus satu per satu, atau hapus semua yang sudah selesai sekaligus.
@@ -31,9 +32,10 @@ BelanjaKita adalah aplikasi web _shopping list_ sederhana untuk mencatat kebutuh
 | CSS                  | Style tambahan (`styles.css`)      |
 | JavaScript (vanilla) | Logika aplikasi dan manipulasi DOM |
 | Web Storage API      | Menyimpan data di `localStorage`   |
-| Vercel               | Hosting static site                |
+| Google Gemini API    | Saran daftar belanja dari AI       |
+| Vercel               | Hosting + serverless function      |
 
-Tidak ada proses _build_. Semua file langsung dijalankan oleh browser.
+Tidak ada proses _build_. File frontend langsung dijalankan oleh browser, sedangkan `api/suggest.js` berjalan sebagai serverless function di Vercel supaya API key Gemini tidak terlihat di browser.
 
 ## Struktur Proyek
 
@@ -42,6 +44,9 @@ Tidak ada proses _build_. Semua file langsung dijalankan oleh browser.
 ├── index.html    # Halaman utama dan konfigurasi Tailwind
 ├── styles.css    # Style tambahan di luar Tailwind
 ├── app.js        # Logika aplikasi (CRUD, filter, localStorage)
+├── api/
+│   └── suggest.js # Serverless function yang memanggil Gemini API
+├── .env.example  # Contoh environment variable
 ├── vercel.json   # Konfigurasi routing Vercel
 ├── package.json  # Dependency Vercel CLI
 └── README.md
@@ -56,13 +61,17 @@ Tidak ada proses _build_. Semua file langsung dijalankan oleh browser.
    cd shopping-list-tkti-p2
    ```
 
-2. Buka `index.html` langsung di browser, **atau** jalankan server lokal:
+2. Salin `.env.example` menjadi `.env`, lalu isi `GEMINI_API_KEY` dengan API key dari [Google AI Studio](https://aistudio.google.com/apikey).
+
+3. Jalankan server lokal Vercel (butuh login `npx vercel login` sekali):
 
    ```bash
-   npx serve .
+   npx vercel dev
    ```
 
    Lalu buka alamat yang muncul di terminal (biasanya `http://localhost:3000`).
+
+   Membuka `index.html` langsung atau lewat `npx serve .` tetap bisa, tetapi fitur **Saran AI** tidak akan jalan karena butuh `api/suggest.js`.
 
 > Butuh koneksi internet saat membuka aplikasi karena Tailwind CSS dan Google Fonts dimuat lewat CDN.
 
@@ -72,6 +81,7 @@ Tidak ada proses _build_. Semua file langsung dijalankan oleh browser.
 - Saat pertama kali dibuka (belum ada data), aplikasi menampilkan beberapa contoh barang.
 - Setiap perubahan (tambah, edit, centang, hapus) langsung disimpan lalu tampilan di-render ulang.
 - Input pengguna di-_escape_ sebelum ditampilkan untuk mencegah injeksi HTML.
+- Saran AI dikirim ke `POST /api/suggest`. Function tersebut memanggil model `gemini-3.8-flash` (fallback ke `gemini-flash-lite-latest` saat model utama sibuk) dan meminta balasan JSON berbentuk `{ explanation, items: [{ name, note }] }`. Barang yang sudah ada di daftar ditandai _Di daftar_ dan tidak ditambahkan dua kali.
 
 Untuk mengosongkan data, hapus key `belanjakita-items` lewat DevTools browser (tab **Application → Local Storage**).
 
@@ -81,9 +91,10 @@ Untuk mengosongkan data, hapus key `belanjakita-items` lewat DevTools browser (t
 2. Buka [Vercel](https://vercel.com) lalu pilih **Add New → Project**.
 3. Import repository `shopping-list-tkti-p2`.
 4. Biarkan **Framework Preset** di `Other`, tanpa build command.
-5. Klik **Deploy**.
+5. Di **Environment Variables**, tambahkan `GEMINI_API_KEY` berisi API key Gemini.
+6. Klik **Deploy**.
 
-File `vercel.json` sudah mengarahkan semua route ke `index.html` dan mengaktifkan _clean URLs_.
+File `vercel.json` sudah mengarahkan semua route (kecuali `/api/*`) ke `index.html` dan mengaktifkan _clean URLs_.
 
 ## Pembuat
 
