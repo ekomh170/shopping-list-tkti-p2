@@ -14,6 +14,7 @@ BelanjaKita adalah aplikasi web _shopping list_ sederhana untuk mencatat kebutuh
 
 - **Tambah barang**: ketik nama barang lalu tekan Enter atau tombol `+`.
 - **Saran AI (Gemini)**: tanyakan makanan, kegiatan, atau benda apa pun, misalnya _"soto ayam untuk 4 orang"_ atau _"mau camping 2 hari"_. AI memberi penjelasan singkat dan daftar barang beserta kegunaannya, lalu kamu pilih mana yang ingin ditambahkan (satu per satu atau sekaligus).
+- **Chat Belanja**: jendela chat asisten belanja (n8n) yang muncul langsung di halaman, lewat tombol _Chat Belanja_ atau ikon chat di pojok kanan bawah.
 - **Edit barang**: ubah nama barang langsung di daftar.
 - **Tandai sudah dibeli**: centang barang yang sudah masuk keranjang.
 - **Hapus barang**: hapus satu per satu, atau hapus semua yang sudah selesai sekaligus.
@@ -25,15 +26,16 @@ BelanjaKita adalah aplikasi web _shopping list_ sederhana untuk mencatat kebutuh
 
 ## Teknologi
 
-| Teknologi            | Kegunaan                           |
-| -------------------- | ---------------------------------- |
-| HTML5                | Struktur halaman                   |
-| Tailwind CSS (CDN)   | Styling utama dan tema warna       |
-| CSS                  | Style tambahan (`styles.css`)      |
-| JavaScript (vanilla) | Logika aplikasi dan manipulasi DOM |
-| Web Storage API      | Menyimpan data di `localStorage`   |
-| Google Gemini API    | Saran daftar belanja dari AI       |
-| Vercel               | Hosting + serverless function      |
+| Teknologi              | Kegunaan                           |
+| ---------------------- | ---------------------------------- |
+| HTML5                  | Struktur halaman                   |
+| Tailwind CSS (CDN)     | Styling utama dan tema warna       |
+| CSS                    | Style tambahan (`styles.css`)      |
+| JavaScript (vanilla)   | Logika aplikasi dan manipulasi DOM |
+| Web Storage API        | Menyimpan data di `localStorage`   |
+| Google Gemini API      | Saran daftar belanja dari AI       |
+| n8n Chat (`@n8n/chat`) | Jendela Chat Belanja di halaman    |
+| Vercel                 | Hosting + serverless function      |
 
 Tidak ada proses _build_. File frontend langsung dijalankan oleh browser, sedangkan `api/suggest.js` berjalan sebagai serverless function di Vercel supaya API key Gemini tidak terlihat di browser.
 
@@ -44,6 +46,7 @@ Tidak ada proses _build_. File frontend langsung dijalankan oleh browser, sedang
 ├── index.html    # Halaman utama dan konfigurasi Tailwind
 ├── styles.css    # Style tambahan di luar Tailwind
 ├── app.js        # Logika aplikasi (CRUD, filter, localStorage)
+├── favicon.svg   # Ikon tab browser (+ favicon.ico dan apple-touch-icon.png)
 ├── api/
 │   └── suggest.js # Serverless function yang memanggil Gemini API
 ├── .env.example  # Contoh environment variable

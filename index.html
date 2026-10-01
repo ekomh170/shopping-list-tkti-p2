@@ -9,6 +9,9 @@
       content="Daftar belanja sederhana untuk mengatur kebutuhan rumah dengan mudah."
     />
     <title>BelanjaKita | Shopping List</title>
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -44,6 +47,10 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@n8n/chat@1.40.3/dist/style.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="min-h-screen bg-paper text-ink antialiased">
@@ -60,7 +67,7 @@
     </div>
 
     <main
-      class="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-5 py-6 sm:px-8 lg:px-12 lg:py-10"
+      class="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-5 pb-24 pt-6 sm:px-8 lg:px-12 lg:pt-10"
     >
       <header class="flex items-center justify-between gap-4">
         <a
@@ -99,9 +106,9 @@
       </header>
 
       <section
-        class="grid flex-1 items-center gap-10 py-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20 lg:py-16"
+        class="grid flex-1 items-center gap-10 py-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-20 lg:py-16"
       >
-        <div class="max-w-lg">
+        <div class="max-w-lg lg:sticky lg:top-16 lg:pt-10">
           <div
             class="mb-5 inline-flex items-center gap-2 rounded-full bg-butter/35 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-ink/70"
           >
@@ -117,6 +124,28 @@
             Catat kebutuhanmu, tandai yang sudah masuk keranjang, dan nikmati
             daftar yang selalu tersimpan.
           </p>
+          <a
+            id="chat-open"
+            href="https://fatu23065ti.app.n8n.cloud/webhook/4df08876-8ae2-4b2c-8559-1716b65b6b73/chat"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-8 inline-flex items-center gap-2.5 rounded-xl bg-moss px-5 py-3 text-sm font-bold text-white shadow-lg shadow-moss/20 transition hover:-translate-y-0.5 hover:bg-[#244a3f] focus:outline-none focus:ring-4 focus:ring-moss/20"
+            title="Buka Chat Belanja"
+          >
+            <svg
+              aria-hidden="true"
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z" />
+            </svg>
+            Chat Belanja
+          </a>
           <div
             class="mt-8 flex items-center gap-5 text-sm font-semibold text-ink/60"
           >
@@ -232,7 +261,7 @@
                   </p>
                   <h3
                     id="ai-question"
-                    class="mt-0.5 truncate font-display text-base font-bold"
+                    class="mt-0.5 line-clamp-2 break-words font-display text-base font-bold"
                   ></h3>
                 </div>
                 <button
@@ -259,15 +288,21 @@
                 id="ai-explanation"
                 class="mt-2 whitespace-pre-line text-sm leading-6 text-ink/70"
               ></p>
+              <div
+                id="ai-actions"
+                class="mt-3 flex items-center justify-between gap-3 border-t border-ink/10 pt-3"
+              >
+                <p id="ai-count" class="text-xs font-semibold text-ink/50"></p>
+                <button
+                  id="ai-add-all"
+                  type="button"
+                  class="shrink-0 rounded-lg bg-moss px-3.5 py-2.5 text-xs font-bold text-white transition hover:bg-[#244a3f] disabled:cursor-not-allowed disabled:opacity-40 sm:py-2"
+                ></button>
+              </div>
               <ul
                 id="ai-suggestions"
-                class="mt-3 max-h-80 divide-y divide-ink/10 overflow-y-auto"
+                class="divide-y divide-ink/10 lg:max-h-[22rem] lg:overflow-y-auto lg:pr-1"
               ></ul>
-              <button
-                id="ai-add-all"
-                type="button"
-                class="mt-3 w-full rounded-xl bg-moss px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#244a3f] disabled:cursor-not-allowed disabled:opacity-40"
-              ></button>
             </div>
           </div>
 
@@ -357,5 +392,61 @@
       role="status"
     ></div>
     <script src="app.js"></script>
+    <script type="module">
+      import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat@1.40.3/dist/chat.bundle.es.js";
+
+      createChat({
+        webhookUrl:
+          "https://fatu23065ti.app.n8n.cloud/webhook/4df08876-8ae2-4b2c-8559-1716b65b6b73/chat",
+        mode: "window",
+        showWindowCloseButton: true,
+        loadPreviousSession: false,
+        initialMessages: [
+          "Hallo! 👋",
+          "Aku Orang Sukses. Apa yang bisa saya bantu hari ini?",
+        ],
+        i18n: {
+          en: {
+            title: "Chat Belanja",
+            subtitle: "Tanya apa saja seputar kebutuhan belanjamu.",
+            footer: "",
+            getStarted: "Mulai Percakapan",
+            inputPlaceholder: "Tulis pertanyaanmu...",
+            closeButtonTooltip: "Tutup chat",
+            repostButton: "Kirim ulang pesan",
+            reuseButton: "Pakai lagi pesan",
+          },
+        },
+      });
+
+      const chatToggle = () => document.querySelector(".chat-window-toggle");
+      const chatWindow = () => document.querySelector(".chat-window");
+      const isChatOpen = () => chatWindow()?.style.display !== "none";
+
+      // Tombol "Chat Belanja" membuka jendela chat di halaman ini.
+      // Kalau widget gagal dimuat, link tetap membuka chat di tab baru.
+      document
+        .getElementById("chat-open")
+        .addEventListener("click", (event) => {
+          if (!chatToggle() || !chatWindow()) return;
+
+          event.preventDefault();
+          if (!isChatOpen()) chatToggle().click();
+          // Fokus otomatis hanya di desktop; di HP keyboard baru muncul saat kolom diketuk.
+          if (matchMedia("(pointer: fine)").matches) {
+            setTimeout(
+              () => chatWindow().querySelector("textarea")?.focus(),
+              200,
+            );
+          }
+        });
+
+      // Tombol X di header widget belum menutup jendela, jadi diteruskan ke toggle.
+      document.addEventListener("click", (event) => {
+        if (event.target.closest(".chat-close-button") && isChatOpen()) {
+          chatToggle()?.click();
+        }
+      });
+    </script>
   </body>
 </html>

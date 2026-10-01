@@ -1,0 +1,9 @@
+# Jangan unggah rahasia lokal saat deploy lewat Vercel CLI
+.env
+.env.*
+!.env.example
+
+node_modules/
+.vscode/
+.idea/
+*.log

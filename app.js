@@ -21,6 +21,8 @@ const aiPanel = document.querySelector("#ai-panel");
 const aiQuestion = document.querySelector("#ai-question");
 const aiExplanation = document.querySelector("#ai-explanation");
 const aiSuggestions = document.querySelector("#ai-suggestions");
+const aiActions = document.querySelector("#ai-actions");
+const aiCount = document.querySelector("#ai-count");
 const aiAddAll = document.querySelector("#ai-add-all");
 
 // { question, explanation, items: [{ name, note }], loading }
@@ -102,23 +104,43 @@ function renderAiResult() {
     ? "Sedang menyiapkan jawaban..."
     : aiResult.explanation;
   aiExplanation.classList.toggle("animate-pulse", Boolean(aiResult.loading));
-  aiSuggestions.innerHTML = aiResult.items.map(renderSuggestion).join("");
-  aiAddAll.classList.toggle("hidden", !aiResult.items.length);
+  aiSuggestions.innerHTML = aiResult.loading
+    ? renderSuggestionSkeleton().repeat(3)
+    : aiResult.items.map(renderSuggestion).join("");
+  aiActions.classList.toggle(
+    "hidden",
+    Boolean(aiResult.loading) || !aiResult.items.length,
+  );
+  aiCount.textContent = `${aiResult.items.length} saran barang`;
   aiAddAll.disabled = remainingCount === 0;
   aiAddAll.textContent = remainingCount
-    ? `Tambah semua (${remainingCount}) ke daftar`
-    : "Semua sudah ada di daftar";
+    ? `+ Tambah semua (${remainingCount})`
+    : "✓ Semua sudah di daftar";
+}
+
+function renderSuggestionSkeleton() {
+  return `<li class="flex animate-pulse items-center gap-3 py-3" aria-hidden="true">
+    <div class="min-w-0 flex-1 space-y-2">
+      <div class="h-3.5 w-2/5 rounded bg-ink/10"></div>
+      <div class="h-3 w-4/5 rounded bg-ink/5"></div>
+    </div>
+    <div class="h-8 w-16 shrink-0 rounded-lg bg-ink/5"></div>
+  </li>`;
 }
 
 function renderSuggestion(suggestion, index) {
   const inList = hasItem(suggestion.name);
-  return `<li class="flex items-start gap-3 py-2.5">
+  return `<li class="flex items-center gap-3 py-3 sm:py-2.5">
     <div class="min-w-0 flex-1">
-      <p class="text-sm font-semibold">${escapeHtml(suggestion.name)}</p>
-      ${suggestion.note ? `<p class="mt-0.5 text-xs leading-5 text-ink/55">${escapeHtml(suggestion.note)}</p>` : ""}
+      <p class="break-words text-sm font-semibold">${escapeHtml(suggestion.name)}</p>
+      ${suggestion.note ? `<p class="mt-0.5 break-words text-xs leading-5 text-ink/55">${escapeHtml(suggestion.note)}</p>` : ""}
     </div>
-    <button class="add-suggestion shrink-0 rounded-lg px-2.5 py-1.5 text-xs font-bold transition ${inList ? "text-moss/60" : "bg-white text-moss shadow-sm hover:bg-mint"}" type="button" data-index="${index}" ${inList ? "disabled" : ""}>${inList ? "✓ Di daftar" : "+ Tambah"}</button>
+    <button class="add-suggestion shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-xs font-bold transition sm:px-2.5 sm:py-1.5 ${inList ? "text-moss/60" : "bg-white text-moss shadow-sm hover:bg-mint"}" type="button" data-index="${index}" ${inList ? "disabled" : ""}>${inList ? "✓ Di daftar" : "+ Tambah"}</button>
   </li>`;
+}
+
+function revealAiPanel() {
+  aiPanel.scrollIntoView({ block: "nearest" });
 }
 
 function addSuggestions(suggestions) {
@@ -199,8 +221,11 @@ aiForm.addEventListener("submit", async (event) => {
   const buttonLabel = aiButton.textContent;
   aiButton.disabled = true;
   aiButton.textContent = "Memikirkan...";
+  // Tutup keyboard di HP supaya jawaban AI tidak tertutup.
+  aiInput.blur();
   aiResult = { question: prompt, explanation: "", items: [], loading: true };
   renderAiResult();
+  revealAiPanel();
 
   try {
     const response = await fetch("/api/suggest", {
@@ -224,6 +249,7 @@ aiForm.addEventListener("submit", async (event) => {
     }
     aiInput.value = "";
     renderAiResult();
+    revealAiPanel();
   } catch (error) {
     aiResult = null;
     renderAiResult();
