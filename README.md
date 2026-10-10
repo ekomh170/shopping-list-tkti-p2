@@ -14,7 +14,7 @@ BelanjaKita adalah aplikasi web _shopping list_ sederhana untuk mencatat kebutuh
 
 - **Tambah barang**: ketik nama barang lalu tekan Enter atau tombol `+`.
 - **Saran AI (Gemini)**: tanyakan makanan, kegiatan, atau benda apa pun, misalnya _"soto ayam untuk 4 orang"_ atau _"mau camping 2 hari"_. AI memberi penjelasan singkat dan daftar barang beserta kegunaannya, lalu kamu pilih mana yang ingin ditambahkan (satu per satu atau sekaligus).
-- **Chat Belanja**: jendela chat asisten belanja (n8n) yang muncul langsung di halaman, lewat tombol _Chat Belanja_ atau ikon chat di pojok kanan bawah.
+- **Chat Belanja**: jendela chat _Asisten Belanja Pintar_ (n8n) yang muncul langsung di halaman, lewat tombol _Chat Belanja_ atau ikon chat di pojok kanan bawah. Asisten bisa mencatat, menampilkan, menandai selesai, dan menghapus barang lewat bahasa sehari-hari (mis. _"beliin beras 5kg"_). Daftar milik asisten disimpan di sisi n8n dan **belum tersinkron** dengan daftar di halaman.
 - **Edit barang**: ubah nama barang langsung di daftar.
 - **Tandai sudah dibeli**: centang barang yang sudah masuk keranjang.
 - **Hapus barang**: hapus satu per satu, atau hapus semua yang sudah selesai sekaligus.
