@@ -2,34 +2,117 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Tema widget Chat Belanja (n8n) agar senada dengan BelanjaKita */
+/* Tema widget Chat Belanja, disamakan dengan Custom CSS di Chat Trigger n8n
+   (halaman chat Asisten Belanja Pintar). */
 :root {
-  --chat--color--primary: #2f5d50;
-  --chat--color--primary-shade-50: #244a3f;
-  --chat--color--primary--shade-100: #1d3c33;
-  --chat--color--secondary: #2f5d50;
-  --chat--color-secondary-shade-50: #244a3f;
-  --chat--color-dark: #17221d;
-  --chat--color-light: #f7f7f2;
-  --chat--font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --chat--border-radius: 0.75rem;
-  --chat--window--width: 400px;
-  --chat--window--height: min(600px, calc(100dvh - 7rem));
-  --chat--window--border: 1px solid rgba(23, 34, 29, 0.1);
-  --chat--window--border-radius: 1.5rem;
-  --chat--header--background: #2f5d50;
+  /* Warna */
+  --chat--color--primary: #2d6a4f;
+  --chat--color--primary-shade-50: #1b4332;
+  --chat--color--primary--shade-100: #081c15;
+  --chat--color--secondary: #52b788;
+  --chat--color-secondary-shade-50: #40916c;
+  --chat--color-white: #ffffff;
+  --chat--color-light: #f4f7f5;
+  --chat--color-light-shade-50: #e2ece9;
+  --chat--color-light-shade-100: #b7e4c7;
+  --chat--color-medium: #d8f3dc;
+  --chat--color-dark: #1b4332;
+  --chat--color-disabled: #d8f3dc;
+  --chat--color-typing: #2d6a4f;
+
+  /* Tata letak & tipografi.
+     CSS n8n menyebut Plus Jakarta Sans, tapi halaman n8n tidak memuat font itu,
+     jadi yang tampil di sana font sistem (Segoe UI di Windows). Font sistem
+     dipakai langsung karena web ini memuat Plus Jakarta Sans tanpa bobot 400. */
+  --chat--spacing: 1.1rem;
+  --chat--border-radius: 12px;
+  --chat--transition-duration: 0.25s;
+  --chat--font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Jendela chat */
+  --chat--window--width: 390px;
+  --chat--window--height: min(590px, calc(100dvh - 7rem));
+  --chat--window--bottom: 20px;
+  --chat--window--right: 20px;
+  --chat--window--z-index: 9999;
+  --chat--window--border: 1px solid var(--chat--color-light-shade-50);
+  --chat--window--border-radius: 16px;
+  --chat--window--margin-bottom: 12px;
+
+  /* Header */
+  --chat--header-height: auto;
+  --chat--header--padding: 1.25rem var(--chat--spacing);
+  --chat--header--background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
   --chat--header--color: #ffffff;
-  --chat--header--padding: 0.875rem 1.25rem;
-  --chat--heading--font-size: 1.125rem;
-  --chat--subtitle--font-size: 0.8125rem;
-  --chat--subtitle--line-height: 1.5;
-  --chat--messages-list--padding: 0.875rem;
-  --chat--message--font-size: 0.9rem;
-  --chat--message--padding: 0.625rem 0.875rem;
+  --chat--header--border-top: none;
+  --chat--header--border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  --chat--header--border-left: none;
+  --chat--header--border-right: none;
+  --chat--heading--font-size: 1.35em;
+  --chat--subtitle--font-size: 0.88em;
+  --chat--subtitle--line-height: 1.4;
+
+  /* Gelembung chat */
+  --chat--message--font-size: 0.95rem;
+  --chat--message--padding: 0.85rem 1.1rem;
+  --chat--message--border-radius: 14px;
   --chat--message-line-height: 1.55;
-  --chat--message--margin-bottom: 0.625rem;
-  --chat--input--font-size: 0.9375rem;
-  --chat--toggle--size: 56px;
+  --chat--message--margin-bottom: 0.8rem;
+  --chat--message--bot--background: #ffffff;
+  --chat--message--bot--color: #1b4332;
+  --chat--message--bot--border: 1px solid var(--chat--color-light-shade-50);
+  --chat--message--user--background: #2d6a4f;
+  --chat--message--user--color: #ffffff;
+  --chat--message--user--border: none;
+  --chat--message--pre--background: rgba(0, 0, 0, 0.04);
+  --chat--messages-list--padding: var(--chat--spacing);
+
+  /* Tombol buka/tutup chat */
+  --chat--toggle--size: 60px;
+  --chat--toggle--width: var(--chat--toggle--size);
+  --chat--toggle--height: var(--chat--toggle--size);
+  --chat--toggle--border-radius: 50%;
+  --chat--toggle--background: #2d6a4f;
+  --chat--toggle--hover--background: #1b4332;
+  --chat--toggle--active--background: #081c15;
+  --chat--toggle--color: #ffffff;
+
+  /* Area ketik pesan */
+  --chat--textarea--height: 48px;
+  --chat--textarea--max-height: 120px;
+  --chat--input--font-size: 0.95rem;
+  --chat--input--border: 1px solid var(--chat--color-light-shade-50);
+  --chat--input--border-radius: 24px;
+  --chat--input--padding: 0.75rem 1rem;
+  --chat--input--background: #ffffff;
+  --chat--input--text-color: #1b4332;
+  --chat--input--line-height: 1.4;
+  --chat--input--placeholder--font-size: 0.9rem;
+  --chat--input--border-active: 1px solid #2d6a4f;
+  --chat--input--left--panel--width: 2rem;
+
+  /* Tombol aksi & kirim */
+  --chat--button--padding: 0.6rem 1.2rem;
+  --chat--button--border-radius: 20px;
+  --chat--button--font-size: 0.9rem;
+  --chat--button--line-height: 1;
+  --chat--button--color--primary: #ffffff;
+  --chat--button--background--primary: #2d6a4f;
+  --chat--button--border--primary: none;
+  --chat--button--color--primary--hover: #ffffff;
+  --chat--button--background--primary--hover: #1b4332;
+  --chat--button--border--primary--hover: none;
+  --chat--close--button--color-hover: #ff6b6b;
+  --chat--input--send--button--background: transparent;
+  --chat--input--send--button--color: #2d6a4f;
+  --chat--input--send--button--background-hover: #e2ece9;
+  --chat--input--send--button--color-hover: #1b4332;
+
+  /* Latar body & footer */
+  --chat--body--background: var(--chat--color-light);
+  --chat--footer--background: #ffffff;
+  --chat--footer--color: #1b4332;
 }
 
 /* Di HP jendela chat dibuat hampir penuh layar, di atas tombol toggle */
@@ -46,18 +129,30 @@ html {
   }
 }
 
-.chat-heading h1 {
-  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+/* Reset Tailwind mengubah gaya bawaan h1/p dan placeholder; dikembalikan
+   supaya sama persis dengan halaman chat n8n. */
+.chat-layout .chat-header h1 {
+  margin: 0.67em 0;
+  font-weight: 700;
+  line-height: 1.15;
 }
 
-.chat-header p {
-  opacity: 0.8;
+.chat-layout .chat-header p {
+  margin: 1em 0;
+}
+
+.chat-inputs textarea::placeholder {
+  color: #757575;
+}
+
+.chat-window {
+  box-shadow: 0 12px 32px rgba(8, 28, 21, 0.15) !important;
 }
 
 /* Jawaban AI panjang (tabel, link, kode) tidak boleh melebar keluar jendela */
 .chat-message {
+  max-width: 82% !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
   overflow-wrap: anywhere;
 }
 
